@@ -68,6 +68,14 @@ namespace SpriteBlender
                 e.Graphics.FillRectangle(b, clientArea);
                 this.Update();
             }
+            //
+            /*notifyIcon.Visible = true;
+            //this.Visible = false;
+            this.Hide();
+            notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+            notifyIcon.BalloonTipTitle = "Sprite Blender is running!";
+            notifyIcon.BalloonTipText = "Double click the system tray icon to open it, or right click the icon and select 'Show Application'";
+            notifyIcon.ShowBalloonTip(2000);*/
         }
 
         #region Ugly PInvoke stuff
@@ -203,9 +211,13 @@ namespace SpriteBlender
 
         private void resetImagesButton_Click(object sender, EventArgs e)
         {
-            finalPictureBox.Image.Dispose();
-            maskPictureBox.Image.Dispose();
-            imagePictureBox.Image.Dispose();
+            if(finalPictureBox.Image != null)
+                finalPictureBox.Image.Dispose();
+            if(maskPictureBox.Image != null)
+                maskPictureBox.Image.Dispose();
+            if(imagePictureBox.Image != null)
+                imagePictureBox.Image.Dispose();
+
             imageGroupBox.Controls.Remove(imagePictureBox);
             maskGroupBox.Controls.Remove(maskPictureBox);
             saveResultButton.Enabled = false;
@@ -241,16 +253,11 @@ namespace SpriteBlender
 
         private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Right)
-            {
-                
-                notifyContextMenu.Show(null, new Point(e.X, e.Y));
-            }
         }
 
         private void menuItem1_Click(object sender, EventArgs e)
         {
-                this.Show();
+            this.Visible = true;
             var screen = Screen.FromPoint(this.Location);
             this.Location = new Point(screen.WorkingArea.Right - this.Width, screen.WorkingArea.Bottom - this.Height);
             notifyIcon.Visible = false;
@@ -267,7 +274,8 @@ namespace SpriteBlender
             if (e.CloseReason == CloseReason.FormOwnerClosing || e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;
-                this.Hide();
+                this.Visible = false;
+                notifyIcon.Visible = true;
             }
             else if(e.CloseReason == CloseReason.ApplicationExitCall || e.CloseReason == CloseReason.WindowsShutDown || e.CloseReason == CloseReason.TaskManagerClosing)
             {
@@ -277,17 +285,12 @@ namespace SpriteBlender
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            notifyIcon.Visible = true;
-            this.Hide();
-            notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
-            notifyIcon.BalloonTipTitle = "Sprite Blender is running!";
-            notifyIcon.BalloonTipText = "Double click the system tray icon to open it, or right click the icon and select 'Show Application'";
-            notifyIcon.ShowBalloonTip(2000);
+            
         }
 
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            this.Show();
+            this.Visible = true;
             var screen = Screen.FromPoint(this.Location);
             this.Location = new Point(screen.WorkingArea.Right - this.Width, screen.WorkingArea.Bottom - this.Height);
             notifyIcon.Visible = false;

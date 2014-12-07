@@ -16,7 +16,14 @@ namespace SpriteBlender
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(true);
-            Application.Run(new Form1());
+            //
+            Form1 form = new Form1();
+            form.notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+            form.notifyIcon.BalloonTipTitle = "Sprite Blender is running!";
+            form.notifyIcon.BalloonTipText = "Double click the system tray icon to open it, or right click the icon and select 'Show Application'";
+            form.notifyIcon.ShowBalloonTip(2000);
+            //
+            Application.Run();
         }
     }
 }
