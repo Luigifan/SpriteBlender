@@ -238,6 +238,60 @@ namespace SpriteBlender
                 }
             }
         }
+
+        private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                
+                notifyContextMenu.Show(null, new Point(e.X, e.Y));
+            }
+        }
+
+        private void menuItem1_Click(object sender, EventArgs e)
+        {
+                this.Show();
+            var screen = Screen.FromPoint(this.Location);
+            this.Location = new Point(screen.WorkingArea.Right - this.Width, screen.WorkingArea.Bottom - this.Height);
+            notifyIcon.Visible = false;
+        }
+
+        private void menuItem3_Click(object sender, EventArgs e)
+        {
+            notifyIcon.Visible = false;
+            Application.Exit();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.FormOwnerClosing || e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                this.Hide();
+            }
+            else if(e.CloseReason == CloseReason.ApplicationExitCall || e.CloseReason == CloseReason.WindowsShutDown || e.CloseReason == CloseReason.TaskManagerClosing)
+            {
+                e.Cancel = false;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            notifyIcon.Visible = true;
+            this.Hide();
+            notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+            notifyIcon.BalloonTipTitle = "Sprite Blender is running!";
+            notifyIcon.BalloonTipText = "Double click the system tray icon to open it, or right click the icon and select 'Show Application'";
+            notifyIcon.ShowBalloonTip(2000);
+        }
+
+        private void notifyIcon_DoubleClick(object sender, EventArgs e)
+        {
+            this.Show();
+            var screen = Screen.FromPoint(this.Location);
+            this.Location = new Point(screen.WorkingArea.Right - this.Width, screen.WorkingArea.Bottom - this.Height);
+            notifyIcon.Visible = false;
+        }
         //
     }
 }

@@ -28,14 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.maskGroupBox = new System.Windows.Forms.GroupBox();
+            this.clickSelMaskLabel = new System.Windows.Forms.Label();
             this.imageGroupBox = new System.Windows.Forms.GroupBox();
+            this.clickSelImageLabel = new System.Windows.Forms.Label();
             this.resultGroupBox = new System.Windows.Forms.GroupBox();
+            this.finalPictureBox = new System.Windows.Forms.PictureBox();
             this.saveResultButton = new System.Windows.Forms.Button();
             this.resetImagesButton = new System.Windows.Forms.Button();
-            this.clickSelImageLabel = new System.Windows.Forms.Label();
-            this.clickSelMaskLabel = new System.Windows.Forms.Label();
-            this.finalPictureBox = new System.Windows.Forms.PictureBox();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notifyContextMenu = new System.Windows.Forms.ContextMenu();
+            this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.menuItem2 = new System.Windows.Forms.MenuItem();
+            this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.maskGroupBox.SuspendLayout();
             this.imageGroupBox.SuspendLayout();
             this.resultGroupBox.SuspendLayout();
@@ -56,6 +62,20 @@
             this.maskGroupBox.Text = "Mask";
             this.maskGroupBox.UseCompatibleTextRendering = true;
             // 
+            // clickSelMaskLabel
+            // 
+            this.clickSelMaskLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.clickSelMaskLabel.AutoSize = true;
+            this.clickSelMaskLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.clickSelMaskLabel.Location = new System.Drawing.Point(27, 78);
+            this.clickSelMaskLabel.Name = "clickSelMaskLabel";
+            this.clickSelMaskLabel.Size = new System.Drawing.Size(101, 13);
+            this.clickSelMaskLabel.TabIndex = 1;
+            this.clickSelMaskLabel.Text = "Click to select mask";
+            this.clickSelMaskLabel.Click += new System.EventHandler(this.clickSelMaskLabel_Click);
+            // 
             // imageGroupBox
             // 
             this.imageGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -70,6 +90,20 @@
             this.imageGroupBox.Text = "Image";
             this.imageGroupBox.UseCompatibleTextRendering = true;
             // 
+            // clickSelImageLabel
+            // 
+            this.clickSelImageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.clickSelImageLabel.AutoSize = true;
+            this.clickSelImageLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.clickSelImageLabel.Location = new System.Drawing.Point(30, 78);
+            this.clickSelImageLabel.Name = "clickSelImageLabel";
+            this.clickSelImageLabel.Size = new System.Drawing.Size(104, 13);
+            this.clickSelImageLabel.TabIndex = 0;
+            this.clickSelImageLabel.Text = "Click to select image";
+            this.clickSelImageLabel.Click += new System.EventHandler(this.clickSelImageLabel_Click);
+            // 
             // resultGroupBox
             // 
             this.resultGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -83,6 +117,16 @@
             this.resultGroupBox.TabStop = false;
             this.resultGroupBox.Text = "Result";
             this.resultGroupBox.UseCompatibleTextRendering = true;
+            // 
+            // finalPictureBox
+            // 
+            this.finalPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.finalPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.finalPictureBox.Location = new System.Drawing.Point(3, 16);
+            this.finalPictureBox.Name = "finalPictureBox";
+            this.finalPictureBox.Size = new System.Drawing.Size(314, 114);
+            this.finalPictureBox.TabIndex = 0;
+            this.finalPictureBox.TabStop = false;
             // 
             // saveResultButton
             // 
@@ -107,43 +151,36 @@
             this.resetImagesButton.UseVisualStyleBackColor = true;
             this.resetImagesButton.Click += new System.EventHandler(this.resetImagesButton_Click);
             // 
-            // clickSelImageLabel
+            // notifyIcon
             // 
-            this.clickSelImageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.clickSelImageLabel.AutoSize = true;
-            this.clickSelImageLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.clickSelImageLabel.Location = new System.Drawing.Point(30, 78);
-            this.clickSelImageLabel.Name = "clickSelImageLabel";
-            this.clickSelImageLabel.Size = new System.Drawing.Size(104, 13);
-            this.clickSelImageLabel.TabIndex = 0;
-            this.clickSelImageLabel.Text = "Click to select image";
-            this.clickSelImageLabel.Click += new System.EventHandler(this.clickSelImageLabel_Click);
+            this.notifyIcon.Text = "notifyIcon1";
+            this.notifyIcon.Visible = true;
+            this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
+            this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
             // 
-            // clickSelMaskLabel
+            // notifyContextMenu
             // 
-            this.clickSelMaskLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.clickSelMaskLabel.AutoSize = true;
-            this.clickSelMaskLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.clickSelMaskLabel.Location = new System.Drawing.Point(27, 78);
-            this.clickSelMaskLabel.Name = "clickSelMaskLabel";
-            this.clickSelMaskLabel.Size = new System.Drawing.Size(101, 13);
-            this.clickSelMaskLabel.TabIndex = 1;
-            this.clickSelMaskLabel.Text = "Click to select mask";
-            this.clickSelMaskLabel.Click += new System.EventHandler(this.clickSelMaskLabel_Click);
+            this.notifyContextMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem1,
+            this.menuItem2,
+            this.menuItem3});
             // 
-            // finalPictureBox
+            // menuItem1
             // 
-            this.finalPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.finalPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.finalPictureBox.Location = new System.Drawing.Point(3, 16);
-            this.finalPictureBox.Name = "finalPictureBox";
-            this.finalPictureBox.Size = new System.Drawing.Size(314, 114);
-            this.finalPictureBox.TabIndex = 0;
-            this.finalPictureBox.TabStop = false;
+            this.menuItem1.Index = 0;
+            this.menuItem1.Text = "Show Application";
+            this.menuItem1.Click += new System.EventHandler(this.menuItem1_Click);
+            // 
+            // menuItem2
+            // 
+            this.menuItem2.Index = 1;
+            this.menuItem2.Text = "-";
+            // 
+            // menuItem3
+            // 
+            this.menuItem3.Index = 2;
+            this.menuItem3.Text = "Exit";
+            this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
             // 
             // Form1
             // 
@@ -160,6 +197,8 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.ShowIcon = false;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.maskGroupBox.ResumeLayout(false);
             this.maskGroupBox.PerformLayout();
             this.imageGroupBox.ResumeLayout(false);
@@ -180,6 +219,11 @@
         private System.Windows.Forms.Label clickSelMaskLabel;
         private System.Windows.Forms.Label clickSelImageLabel;
         private System.Windows.Forms.PictureBox finalPictureBox;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.ContextMenu notifyContextMenu;
+        private System.Windows.Forms.MenuItem menuItem1;
+        private System.Windows.Forms.MenuItem menuItem2;
+        private System.Windows.Forms.MenuItem menuItem3;
     }
 }
 
