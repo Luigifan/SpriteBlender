@@ -98,21 +98,34 @@ namespace SpriteBlender
         #region ifGlassSelected
         protected override void WndProc(ref Message m)
         {
-            base.WndProc(ref m);
+            /*base.WndProc(ref m);
 
             if (m.Msg == VistaApi.WM_NCHITTEST // if this is a click
               && m.Result.ToInt32() == VistaApi.HTCLIENT // ...and it is on the client
               && this.IsOnGlass(m.LParam.ToInt32())) // ...and specifically in the glass area
             {
                 m.Result = new IntPtr(VistaApi.HTCAPTION); // lie and say they clicked on the title bar
+            }*/ //if we were still interested in having glass portions move, sure this would be great
+            const int WM_SYSCOMMAND = 0x0112;
+            const int SC_MOVE = 0xF010;
+
+            switch (m.Msg)
+            {
+                case WM_SYSCOMMAND:
+                    int command = m.WParam.ToInt32() & 0xfff0;
+                    if (command == SC_MOVE)
+                        return;
+                    break;
             }
+
+            base.WndProc(ref m);
         }
 
         private bool IsGlassEnabled()
         {
             if (Environment.OSVersion.Version.Major < 6)
             {
-                Debug.WriteLine("How about trying this on Vista?");
+                Debug.WriteLine("Not drawing glass");
                 return false;
             }
 
@@ -251,10 +264,6 @@ namespace SpriteBlender
             }
         }
 
-        private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
-        {
-        }
-
         private void menuItem1_Click(object sender, EventArgs e)
         {
             this.Visible = true;
@@ -281,11 +290,6 @@ namespace SpriteBlender
             {
                 e.Cancel = false;
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
         }
 
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
