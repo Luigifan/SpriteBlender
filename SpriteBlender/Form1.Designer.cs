@@ -48,6 +48,7 @@
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.versionLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.button1 = new System.Windows.Forms.Button();
             this.maskGroupBox.SuspendLayout();
             this.imageGroupBox.SuspendLayout();
             this.resultGroupBox.SuspendLayout();
@@ -229,11 +230,22 @@
             this.versionLinkLabel.TabStop = true;
             this.versionLinkLabel.Text = "v{0}";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(47, 13);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "showUpdate";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(413, 445);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.versionLinkLabel);
             this.Controls.Add(this.resetImagesButton);
             this.Controls.Add(this.saveResultButton);
@@ -278,6 +290,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         public System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.LinkLabel versionLinkLabel;
+        private System.Windows.Forms.Button button1;
     }
 }
 

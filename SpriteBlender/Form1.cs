@@ -311,6 +311,12 @@ namespace SpriteBlender
             this.Location = new Point(screen.WorkingArea.Right - this.Width, screen.WorkingArea.Bottom - this.Height);
             notifyIcon.Visible = false;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UpdateChecker uc = new UpdateChecker();
+            uc.ShowDialog();
+        }
         //
     }
 }
