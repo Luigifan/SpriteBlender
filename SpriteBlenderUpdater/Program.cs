@@ -15,7 +15,14 @@ namespace SpriteBlenderUpdater
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main(args[0]));
+            try
+            {
+                Application.Run(new Main(args[0]));
+            }
+            catch
+            {
+                System.Windows.Forms.MessageBox.Show("Hey you! Stay outta here!");
+            }
         }
     }
 }

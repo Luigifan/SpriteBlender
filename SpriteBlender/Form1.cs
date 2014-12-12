@@ -242,8 +242,6 @@ namespace SpriteBlender
             {
                 //ignore
             }
-            //imageGroupBox.Controls.Remove(imagePictureBox);
-            //maskGroupBox.Controls.Remove(maskPictureBox);
             imagePictureBox.Dispose();
             maskPictureBox.Dispose();
             saveResultButton.Enabled = false;
