@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace SpriteBlender
     public partial class UpdateChecker : Form
     {
         static string versionUrl = "https://raw.githubusercontent.com/Luigifan/SpriteBlender/master/version.txt";
-        static string changelogUrl;
+        static string changelogUrl = "https://raw.githubusercontent.com/Luigifan/SpriteBlender/master/changelog.txt";
+        static string updaterUrl = "https://raw.githubusercontent.com/Luigifan/SpriteBlender/master/updates/SpriteBlenderUpdater.exe";
         static string AppDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "SpriteBlender";
         static Version curVersion = new Version(Application.ProductVersion);
         static Version latestVersion = new Version();
@@ -31,6 +33,11 @@ namespace SpriteBlender
 
         private void UpdateChecker_Load(object sender, EventArgs e)
         {
+            expandedHeight = this.Height;
+            expandedWidth = this.Width;
+            //
+            this.Height = this.Height - groupBox.Height;
+            //
             CheckForIllegalCrossThreadCalls = false;
             Thread t = new Thread(CheckForUpdates);
             t.Start();
@@ -56,19 +63,17 @@ namespace SpriteBlender
             int result = curVersion.CompareTo(latestVersion); //0 = same, 1 or more = newer, less than 0 = older
             if(result < 1)
             {
-                int newWidth = this.Width + 100;
-                int newHeight = this.Height + 400;
-                while(this.Width < newWidth && this.Height < newHeight)
+                while(this.Width < expandedWidth)
                 {
                     this.Width++;
-                    this.Height++;
                     Application.DoEvents();
                 }
                 //blah blah 
                 progressBar.Style = ProgressBarStyle.Blocks;
                 statusLabel.Text = "Update available!";
+                groupBox.Visible = true;
                 byte[] changelog = wc.DownloadData(changelogUrl);
-
+                changelogRtf.Text = Encoding.ASCII.GetString(changelog);
             }
             else if(result > 1 || result == 0)
             {
@@ -82,12 +87,33 @@ namespace SpriteBlender
         /// </summary>
         private void DoUpdates()
         {
-
+            progressBar.Style = ProgressBarStyle.Marquee;
+            statusLabel.Text = "Downloading updater..";
+            try
+            {
+                WebClient wc = new WebClient();
+                wc.DownloadFile(updaterUrl, AppDataFolder + Path.DirectorySeparatorChar + "SpriteBlenderUpdater.exe");
+                progressBar.Style = ProgressBarStyle.Blocks;
+                statusLabel.Text = "Updater downloaded.";
+                Process.Start(AppDataFolder + Path.DirectorySeparatorChar + "SpriteBlenderUpdater.exe", Application.ExecutablePath);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(string.Format("An error occurred while downloading the updater!\n\nStack: {0}", ex.Message), 
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            Thread t = new Thread(DoUpdates);
+            t.Start();
         }
     }
 }

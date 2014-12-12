@@ -76,22 +76,23 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.changelogRtf.Location = new System.Drawing.Point(7, 20);
             this.changelogRtf.Name = "changelogRtf";
-            this.changelogRtf.Size = new System.Drawing.Size(382, 205);
+            this.changelogRtf.Size = new System.Drawing.Size(382, 220);
             this.changelogRtf.TabIndex = 0;
             this.changelogRtf.Text = "";
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(308, 231);
+            this.updateButton.Location = new System.Drawing.Point(308, 246);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(75, 23);
             this.updateButton.TabIndex = 1;
             this.updateButton.Text = "Update";
             this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(227, 231);
+            this.cancelButton.Location = new System.Drawing.Point(227, 246);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 2;

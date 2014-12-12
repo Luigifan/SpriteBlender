@@ -50,6 +50,7 @@ namespace SpriteBlender
                 //
                 DwmExtendFrameIntoClientArea(this.Handle, ref margins);
             }
+            versionLinkLabel.Text = string.Format("v{0}", Application.ProductVersion.ToString());
         }
         protected override void OnPaintBackground(PaintEventArgs e)
         {
@@ -313,6 +314,12 @@ namespace SpriteBlender
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            UpdateChecker uc = new UpdateChecker();
+            uc.ShowDialog();
+        }
+
+        private void versionLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             UpdateChecker uc = new UpdateChecker();
             uc.ShowDialog();
