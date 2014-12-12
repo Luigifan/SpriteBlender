@@ -73,7 +73,17 @@ namespace SpriteBlenderUpdater
         {
             statusLabel.Text = "Replacing original...";
             File.Delete(spriteBlenderLoc);
-            File.Move(appDataLocation + Path.DirectorySeparatorChar + "SpriteBlender_Latest.exe", spriteBlenderLoc);
+            try
+            {
+                File.Move(appDataLocation + Path.DirectorySeparatorChar + "SpriteBlender_Latest.exe", spriteBlenderLoc);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(string.Format("An error occurred while trying to update!\n\nStack: {0}", ex.InnerException), 
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(-3); //-3 means an error occurred while trying to replace
+            }
+            Complete();
         }
 
         private void Complete()
