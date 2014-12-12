@@ -38,8 +38,8 @@ namespace SpriteBlender
                 Rectangle together = new Rectangle(imageGroupBox.Location.X, imageGroupBox.Location.Y,
                     imageGroupBox.Width + maskGroupBox.Width, imageGroupBox.Height + resultGroupBox.Height + saveResultButton.Height);
                 margins = new MARGINS();
-                margins.Top = (this.Height - together.Height)/2/2;
-                margins.Left = (this.Width - together.Width)/2/2;
+                margins.Top = (this.Height - together.Height)/2/2/2;
+                margins.Left = (this.Width - together.Width)/2/2/2;
                 margins.Right = margins.Left;
                 margins.Bottom = margins.Top;
                 //Define rectnangles, for detection of whether or not the selected area is glass
@@ -217,7 +217,7 @@ namespace SpriteBlender
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show("Error attempting to blend sprites!\n\nStack Trace: {0}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(string.Format("Error attempting to blend sprites!\n\nStack Trace: {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -231,8 +231,20 @@ namespace SpriteBlender
             if(imagePictureBox.Image != null)
                 imagePictureBox.Image.Dispose();
 
-            imageGroupBox.Controls.Remove(imagePictureBox);
-            maskGroupBox.Controls.Remove(maskPictureBox);
+            try
+            {
+                imagePictureBox.Image = null;
+                maskPictureBox.Image = null;
+                finalPictureBox.Image = null;
+            }
+            catch
+            {
+                //ignore
+            }
+            //imageGroupBox.Controls.Remove(imagePictureBox);
+            //maskGroupBox.Controls.Remove(maskPictureBox);
+            imagePictureBox.Dispose();
+            maskPictureBox.Dispose();
             saveResultButton.Enabled = false;
             clickSelMaskLabel.Visible = true;
             clickSelImageLabel.Visible = true;

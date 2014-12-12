@@ -47,6 +47,7 @@
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
+            this.versionLinkLabel = new System.Windows.Forms.LinkLabel();
             this.maskGroupBox.SuspendLayout();
             this.imageGroupBox.SuspendLayout();
             this.resultGroupBox.SuspendLayout();
@@ -62,7 +63,7 @@
             this.maskGroupBox.ForeColor = System.Drawing.Color.Black;
             this.maskGroupBox.Location = new System.Drawing.Point(208, 52);
             this.maskGroupBox.Name = "maskGroupBox";
-            this.maskGroupBox.Size = new System.Drawing.Size(156, 177);
+            this.maskGroupBox.Size = new System.Drawing.Size(160, 177);
             this.maskGroupBox.TabIndex = 3;
             this.maskGroupBox.TabStop = false;
             this.maskGroupBox.Text = "Mask";
@@ -90,7 +91,7 @@
             this.imageGroupBox.ForeColor = System.Drawing.Color.Black;
             this.imageGroupBox.Location = new System.Drawing.Point(44, 52);
             this.imageGroupBox.Name = "imageGroupBox";
-            this.imageGroupBox.Size = new System.Drawing.Size(156, 177);
+            this.imageGroupBox.Size = new System.Drawing.Size(160, 177);
             this.imageGroupBox.TabIndex = 2;
             this.imageGroupBox.TabStop = false;
             this.imageGroupBox.Text = "Image";
@@ -116,9 +117,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.resultGroupBox.Controls.Add(this.finalPictureBox);
             this.resultGroupBox.ForeColor = System.Drawing.Color.Black;
-            this.resultGroupBox.Location = new System.Drawing.Point(44, 235);
+            this.resultGroupBox.Location = new System.Drawing.Point(44, 239);
             this.resultGroupBox.Name = "resultGroupBox";
-            this.resultGroupBox.Size = new System.Drawing.Size(320, 133);
+            this.resultGroupBox.Size = new System.Drawing.Size(324, 133);
             this.resultGroupBox.TabIndex = 3;
             this.resultGroupBox.TabStop = false;
             this.resultGroupBox.Text = "Result";
@@ -130,7 +131,7 @@
             this.finalPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.finalPictureBox.Location = new System.Drawing.Point(3, 16);
             this.finalPictureBox.Name = "finalPictureBox";
-            this.finalPictureBox.Size = new System.Drawing.Size(314, 114);
+            this.finalPictureBox.Size = new System.Drawing.Size(318, 114);
             this.finalPictureBox.TabIndex = 0;
             this.finalPictureBox.TabStop = false;
             // 
@@ -173,7 +174,7 @@
             this.exitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(168, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(168, 54);
             // 
             // showApplicationToolStripMenuItem
             // 
@@ -218,11 +219,22 @@
             this.menuItem3.Text = "Exit";
             this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
             // 
+            // versionLinkLabel
+            // 
+            this.versionLinkLabel.AutoSize = true;
+            this.versionLinkLabel.Location = new System.Drawing.Point(47, 408);
+            this.versionLinkLabel.Name = "versionLinkLabel";
+            this.versionLinkLabel.Size = new System.Drawing.Size(27, 13);
+            this.versionLinkLabel.TabIndex = 6;
+            this.versionLinkLabel.TabStop = true;
+            this.versionLinkLabel.Text = "v{0}";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(409, 441);
+            this.ClientSize = new System.Drawing.Size(413, 445);
+            this.Controls.Add(this.versionLinkLabel);
             this.Controls.Add(this.resetImagesButton);
             this.Controls.Add(this.saveResultButton);
             this.Controls.Add(this.resultGroupBox);
@@ -242,6 +254,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.finalPictureBox)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -264,6 +277,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         public System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.LinkLabel versionLinkLabel;
     }
 }
 
