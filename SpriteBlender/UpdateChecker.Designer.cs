@@ -68,7 +68,6 @@
             this.groupBox.TabIndex = 2;
             this.groupBox.TabStop = false;
             this.groupBox.Text = "Changelog";
-            this.groupBox.Visible = false;
             // 
             // changelogRtf
             // 
@@ -108,10 +107,12 @@
             this.Controls.Add(this.groupBox);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.progressBar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "UpdateChecker";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Update";
             this.Load += new System.EventHandler(this.UpdateChecker_Load);

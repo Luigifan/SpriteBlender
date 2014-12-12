@@ -37,6 +37,12 @@ namespace SpriteBlender
             expandedWidth = this.Width;
             //
             this.Height = this.Height - groupBox.Height;
+            groupBox.Visible = false;
+            //
+            if(Directory.Exists(AppDataFolder) != true)
+            {
+                Directory.CreateDirectory(AppDataFolder);
+            }
             //
             CheckForIllegalCrossThreadCalls = false;
             Thread t = new Thread(CheckForUpdates);
@@ -63,16 +69,17 @@ namespace SpriteBlender
             int result = curVersion.CompareTo(latestVersion); //0 = same, 1 or more = newer, less than 0 = older
             if(result < 1)
             {
-                while(this.Width < expandedWidth)
+                statusLabel.Text = "Retrieveing changelog..";
+                byte[] changelog = wc.DownloadData(changelogUrl);
+                while(this.Height < expandedHeight)
                 {
-                    this.Width++;
+                    this.Height++;
                     Application.DoEvents();
                 }
                 //blah blah 
-                progressBar.Style = ProgressBarStyle.Blocks;
+                progressBar.Style = ProgressBarStyle.Continuous;
                 statusLabel.Text = "Update available!";
                 groupBox.Visible = true;
-                byte[] changelog = wc.DownloadData(changelogUrl);
                 changelogRtf.Text = Encoding.ASCII.GetString(changelog);
             }
             else if(result > 1 || result == 0)
@@ -87,19 +94,20 @@ namespace SpriteBlender
         /// </summary>
         private void DoUpdates()
         {
-            progressBar.Style = ProgressBarStyle.Marquee;
+            progressBar.Style = ProgressBarStyle.Continuous;
             statusLabel.Text = "Downloading updater..";
             try
             {
                 WebClient wc = new WebClient();
                 wc.DownloadFile(updaterUrl, AppDataFolder + Path.DirectorySeparatorChar + "SpriteBlenderUpdater.exe");
-                progressBar.Style = ProgressBarStyle.Blocks;
+                progressBar.Style = ProgressBarStyle.Marquee;
                 statusLabel.Text = "Updater downloaded.";
                 Process.Start(AppDataFolder + Path.DirectorySeparatorChar + "SpriteBlenderUpdater.exe", Application.ExecutablePath);
+                Environment.Exit(5); //5 means we're closing for updates
             }
-            catch(Exception ex)
+            catch(System.Net.WebException ex)
             {
-                MessageBox.Show(string.Format("An error occurred while downloading the updater!\n\nStack: {0}", ex.Message), 
+                MessageBox.Show(string.Format("An error occurred while downloading the updater!\n\nStack: {0}", ex.InnerException), 
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
