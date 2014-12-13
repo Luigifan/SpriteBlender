@@ -67,7 +67,7 @@ namespace SpriteBlender
                 this.Close();
             }
             int result = curVersion.CompareTo(latestVersion); //0 = same, 1 or more = newer, less than 0 = older
-            if(result < 1)
+            if(result <= -1)
             {
                 statusLabel.Text = "Retrieveing changelog..";
                 byte[] changelog = wc.DownloadData(changelogUrl);
